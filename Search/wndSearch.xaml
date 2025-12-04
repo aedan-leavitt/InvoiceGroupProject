@@ -1,0 +1,89 @@
+﻿
+
+<Window x:Class="groupProject.Search.wndSearch"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:groupProject.Search"
+        mc:Ignorable="d"
+        Title="wndSearch" Height="550" Width="800" MinHeight="550" MinWidth="800" WindowStartupLocation="CenterScreen">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="35*"/>
+            <ColumnDefinition Width="65*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="65*"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Options" Margin="10">
+            <StackPanel Margin="5">
+                <StackPanel Margin="0,20,0,0">
+                    <Label Content="Select an invoice..."></Label>
+                    <ComboBox x:Name="cbInvoiceSelected" Margin="5" ItemsSource="{Binding ElementName=dgInvoiceList, Path=ItemsSource}" SelectedValuePath="InvoiceNum" SelectionChanged="cbInvoiceSelected_SelectionChanged"></ComboBox>
+                </StackPanel>
+                
+            </StackPanel>
+        </GroupBox>
+        
+        <GroupBox Header="Filters" Margin="10" Grid.Row="1">
+            <StackPanel Margin="0,0,0,10">
+                <TreeView>
+                    <TreeViewItem Name="DateFilter" Margin="10">
+                        <TreeViewItem.Header>
+                            <Label Content="Filter by date"></Label>
+                        </TreeViewItem.Header>
+                        <ComboBox x:Name="cbDateFilter" Margin="5" Width="150"></ComboBox>
+                    </TreeViewItem>
+
+
+                    <TreeViewItem Margin="10">
+                        <TreeViewItem.Header>
+                            <Label Content="Filter by cost"></Label>
+                        </TreeViewItem.Header>
+
+                        <ComboBox x:Name="cbCostFilter" Margin="5" Width="150"></ComboBox>
+                    </TreeViewItem>
+
+
+                    <TreeViewItem Margin="10">
+                        <TreeViewItem.Header>
+                            <Label Content="Filter by Invoice Number"></Label>
+                        </TreeViewItem.Header>
+                        <ComboBox x:Name="cbInvoiceNumFilter" Margin="5" Width="150"></ComboBox>
+                    </TreeViewItem>
+
+                </TreeView>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                    <Button Content="Apply" Margin="5" Width="100" HorizontalAlignment="Left" Click="btnApply_Click"></Button>
+                    <Button Content="Reset" Margin="5" Width="100" HorizontalAlignment="Right" Click="btnReset_Click"></Button>
+                </StackPanel>
+              
+                
+               
+
+            </StackPanel>
+           
+            
+        </GroupBox>
+        <StackPanel Grid.RowSpan="2" Grid.Column="1"  Margin="20">
+            <DataGrid x:Name="dgInvoiceList" SelectionMode="Single" Height="400" AutoGenerateColumns="False" SelectionChanged="dgInvoiceList_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Invoice Number" Binding="{Binding InvoiceNum}" Width="175"/>
+                    <DataGridTextColumn Header="Invoice Date"  Binding="{Binding InvoiceDate}" Width="175"/>
+                    <DataGridTextColumn Header="Total Cost" Binding="{Binding TotalCost}" Width="125"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="cmdSelectInvoice" Content="Select Invoice" HorizontalAlignment="Right" Margin="10" Width="110" IsEnabled="False" Click="cmdSelectInvoice_Click"></Button>
+                <Button x:Name="cmdCancelSearch" Content="Cancel Search" HorizontalAlignment="Right" Margin="10" Width="110" IsEnabled="True" Click="Button_Click"></Button>
+            </StackPanel>
+        </StackPanel>
+        
+    </Grid>
+</Window>
